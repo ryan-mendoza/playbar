@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>Music Player Bar</title>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="controller">
+            <div class="album">
+                <img src="images/disclosure-album.jpeg" />
+            </div>
+
+            <div class="controls">
+                <div id="playPause"></div>
+                <progress id="progress" max="100" value="0"></progress>
+            </div>
+
+            <div>
+                <progress max="100" value="80"></progress>
+            </div>
+
+        </div>
+        <audio id="audio" src="/audio/bensound-dubstep.mp3"></audio>
+    </div>
+
+
+
+    <script>
+        document.getElementById('playPause').innerHTML = '<img src="images/play.svg" onclick="play()" />';
+        const audio = document.getElementById('audio');
+        // document.getElementById("audio").volume = 0.05;
+
+
+        // let duration = audio.duration;
+        // let percentage = (audio.currentTime / duration) * 100;
+        // let progress = Math.round(percentage);
+
+        // document.getElementById("audio").volume = 0.05;
+
+        // audio.addEventListener('ontimeupdate', (event) => {
+        //     document.getElementById('progress').value = progress;
+        // });
+
+        audio.ontimeupdate = function () {
+            let time = (audio.currentTime / audio.duration) * 100;
+            let progress = Math.round(time)
+            document.getElementById('progress').value = progress;
+        }
+
+        audio.volume = 0.05;
+
+        function play() {
+            document.getElementById('playPause').innerHTML = '<img src="images/pause.svg" onclick="pause()" />';
+
+            audio.play();
+        }
+
+        function pause() {
+            document.getElementById('playPause').innerHTML = '<img src="images/play.svg" onclick="play()" />';
+
+            audio.pause();
+        }
+    </script>
+
+
+</body>
+
+</html>
